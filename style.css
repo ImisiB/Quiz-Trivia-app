@@ -5,3 +5,6 @@
   display: block;
   margin: 10px 10px;
 }
+.nextButton{
+  display: none;
+}
