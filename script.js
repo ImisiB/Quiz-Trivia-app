@@ -1,6 +1,5 @@
 let startButton = document.querySelector('.startButton')
 
-
 function startQuiz() {
   startButton.style.display = 'none'
   let currentQuestionIndex = 0
@@ -16,11 +15,15 @@ function startQuiz() {
   let science = document.querySelector('.science')
 
 maths.addEventListener('click', () => {
+  let realAnswer = document.querySelector('.realAnswer')
   let nextButton = document.querySelector('.nextButton')
   nextButton.style.display = 'block';
+  let answerButton = document.querySelector('.answerButton')
+  answerButton.style.display = 'block'
   maths.style.display = 'none'
   english.style.display = 'none'
   science.style.display = 'none'
+
 
   const mathQuestions= [
   { id: 1, question: "What is 5 + 7?", options: ["10", "11", "12", "13"], answer: "12" },
@@ -136,7 +139,7 @@ maths.addEventListener('click', () => {
     
 
   // let randomMathQuestion = mathQuestions[Math.floor(Math.random() * mathQuestions.length)];
-  console.log(randomMathQuestion.length);
+  
   
   let question = document.querySelector('.question')
   let options = document.querySelector('.options')
@@ -155,26 +158,26 @@ maths.addEventListener('click', () => {
     <option value="${randomMathQuestion[0].options[3]}">D</option>
   </select>
   `;
-
- options.innerHTML += `<button class='answerButton'>answer</button>`;
  let userOption = document.querySelector('.userAnswer')
  
-  let answerButton = document.querySelector('.answerButton')
-  answerButton.addEventListener('click', () => {
-    if(userOption.value === randomMathQuestion[0].answer) {
-      console.log('correct');
-      score += 1
-      // console.log(score+'/10');
-        
-       
-    } else if(userOption !== randomMathQuestion[0].answer) {
-      // console.log(score, '/10');
-      console.log('incorrect');
-      }
-  })
+  function answer() {
+    if(userOption.value === randomMathQuestion[currentQuestionIndex].answer) {
+     answerButton.disabled = 'true';
+      score++;
+      realAnswer.innerText = `Correct! ${score}/10`
 
+    } else if(userOption !== randomMathQuestion[currentQuestionIndex].answer) {
+      realAnswer.innerText = `Incorrect, Answer: '${randomMathQuestion[currentQuestionIndex].answer}', ${score}/10` 
+      answerButton.disabled = 'true';
+      };
+  }
+    answerButton.addEventListener('click', () => {
+      answer();
+    })
 
   function displayQuestion() {
+    
+    answerButton.disabled = false
     options.innerHTML = `<li class='option'>A. ${randomMathQuestion[currentQuestionIndex].options[0]}</li>`;
     options.innerHTML += `<li class='option'>B. ${randomMathQuestion[currentQuestionIndex].options[1]}</li>`;
     options.innerHTML += `<li class='option'>C. ${randomMathQuestion[currentQuestionIndex].options[2]}</li>`;
@@ -188,31 +191,57 @@ maths.addEventListener('click', () => {
       <option value="${randomMathQuestion[currentQuestionIndex].options[3]}">D</option>
     </select>
     `;
-    options.innerHTML += `<button class='answerButton'>answer</button>`;
-    question.innerText = currentQuestionIndex +1 + '. ' + randomMathQuestion[currentQuestionIndex].question
-}
-    nextButton.addEventListener('click', () => {
+let userOption = document.querySelector('.userAnswer')
+ 
+  function answer() {
+    if(userOption.value === randomMathQuestion[currentQuestionIndex].answer) {
+      answerButton.disabled = 'true';
+      score++;
+      realAnswer.innerText = `Correct! ${score}/10`;
+     
+    } else if(userOption !== randomMathQuestion[currentQuestionIndex].answer) {
+      realAnswer.innerText = `Incorrect, Answer: '${randomMathQuestion[currentQuestionIndex].answer}', ${score}/10` 
+      answerButton.disabled = 'true';
+      };
+  }
+    answerButton.addEventListener('click', () => {
+      answer();
+    })
+
+    question.innerText = currentQuestionIndex +1 + '. ' + randomMathQuestion[currentQuestionIndex].question;
+  }
+
+  nextButton.addEventListener('click', () => {
+      answerButton.disabled = 'false';
+
     if(currentQuestionIndex < randomMathQuestion.length - 1) {
       currentQuestionIndex++;
-      console.log(currentQuestionIndex);
-      displayQuestion()
+      displayQuestion();
     } else {
-        alert("You have completed the quiz!");
+        alert(`You have completed the quiz! You got ${score}/10`);
         currentQuestionIndex = 0;
         nextButton.disabled = true;
+        let tryAgain = document.querySelector('.retryButton')
+        tryAgain.style.display = 'block'
+        tryAgain.addEventListener('click', () => {
+          window.location.reload()
+          startQuiz();
+          
+        })
       }
   })
-
-
 })
 english.addEventListener('click', () => {
-  let nextButton = document.querySelector('.nextButton')
+  let realAnswer = document.querySelector('.realAnswer');
+  let nextButton = document.querySelector('.nextButton');
   nextButton.style.display = 'block';
-  maths.style.display = 'none'
-  english.style.display = 'none'
-  science.style.display = 'none'
+  let answerButton = document.querySelector('.answerButton');
+  answerButton.style.display = 'block';
+  maths.style.display = 'none';
+  english.style.display = 'none';
+  science.style.display = 'none';
 
-  
+
 const englishQuestions = [
   { id: 1, question: "Choose the correct form: She ___ to the store yesterday.", options: ["go", "goes", "went", "gone"], answer: "went" },
   { id: 2, question: "Identify the noun in the sentence: 'The cat slept peacefully.'", options: ["The", "cat", "slept", "peacefully"], answer: "cat" },
@@ -312,7 +341,7 @@ const englishQuestions = [
   { id: 98, question: "Choose the correct spelling.", options: ["Dilemma", "Dilema", "Dilemna", "Dilemma"], answer: "Dilemma" },
   { id: 99, question: "Fill in the blank: She has ___ friends.", options: ["much", "a lot of", "little", "any"], answer: "a lot of" },
   { id: 100, question: "What is the past participle of 'be'?", options: ["was", "been", "being", "is"], answer: "been" }
-]
+];
 
   let randomEnglishQuestion = []
 
@@ -323,8 +352,8 @@ const englishQuestions = [
   } 
     
 
-  // let randomEnglishQuestion = mathQuestions[Math.floor(Math.random() * mathQuestions.length)];
-  console.log(randomEnglishQuestion.length);
+  // let randomEnglishQuestion = EnglishQuestions[Math.floor(Math.random() * EnglishQuestions.length)];
+  
   
   let question = document.querySelector('.question')
   let options = document.querySelector('.options')
@@ -343,26 +372,26 @@ const englishQuestions = [
     <option value="${randomEnglishQuestion[0].options[3]}">D</option>
   </select>
   `;
-
- options.innerHTML += `<button class='answerButton'>answer</button>`;
  let userOption = document.querySelector('.userAnswer')
  
-  let answerButton = document.querySelector('.answerButton')
-  answerButton.addEventListener('click', () => {
-    if(userOption.value === randomEnglishQuestion[0].answer) {
-      console.log('correct');
-      score += 1
-      // console.log(score+'/10');
-        
-       
-    } else if(userOption !== randomEnglishQuestion[0].answer) {
-      // console.log(score, '/10');
-      console.log('incorrect');
-      }
-  })
-
+  function answer() {
+    if(userOption.value === randomEnglishQuestion[currentQuestionIndex].answer) {
+     answerButton.disabled = 'true';
+      score++;
+      realAnswer.innerText = `Correct! ${score}/10`
+     
+    } else if(userOption !== randomEnglishQuestion[currentQuestionIndex].answer) {
+      realAnswer.innerText = `Incorrect, Answer: '${randomEnglishQuestion[currentQuestionIndex].answer}', ${score}/10`;
+      answerButton.disabled = 'true';
+      };
+  }
+    answerButton.addEventListener('click', () => {
+      answer();
+    })
 
   function displayQuestion() {
+    
+    answerButton.disabled = false
     options.innerHTML = `<li class='option'>A. ${randomEnglishQuestion[currentQuestionIndex].options[0]}</li>`;
     options.innerHTML += `<li class='option'>B. ${randomEnglishQuestion[currentQuestionIndex].options[1]}</li>`;
     options.innerHTML += `<li class='option'>C. ${randomEnglishQuestion[currentQuestionIndex].options[2]}</li>`;
@@ -376,31 +405,58 @@ const englishQuestions = [
       <option value="${randomEnglishQuestion[currentQuestionIndex].options[3]}">D</option>
     </select>
     `;
-    options.innerHTML += `<button class='answerButton'>answer</button>`;
-    question.innerText = currentQuestionIndex +1 + '. ' + randomEnglishQuestion[currentQuestionIndex].question
-}
-    nextButton.addEventListener('click', () => {
+let userOption = document.querySelector('.userAnswer')
+ 
+  function answer() {
+    if(userOption.value === randomEnglishQuestion[currentQuestionIndex].answer) {
+      answerButton.disabled = 'true';
+      score++;
+      realAnswer.innerText = `Correct! ${score}/10`;
+     
+    } else if(userOption !== randomEnglishQuestion[currentQuestionIndex].answer) {
+        realAnswer.innerText = `Incorrect, Answer: '${randomEnglishQuestion[currentQuestionIndex].answer}', ${score}/10`;
+        answerButton.disabled = 'true';
+      };
+  }
+    answerButton.addEventListener('click', () => {
+      answer();
+    })
+
+    question.innerText = currentQuestionIndex +1 + '. ' + randomEnglishQuestion[currentQuestionIndex].question;
+  }
+
+  nextButton.addEventListener('click', () => {
+      answerButton.disabled = 'false';
+
     if(currentQuestionIndex < randomEnglishQuestion.length - 1) {
       currentQuestionIndex++;
-      console.log(currentQuestionIndex);
-      displayQuestion()
+      displayQuestion();
     } else {
-        alert("You have completed the quiz!");
+        alert(`You have completed the quiz! You got ${score}/10`);
         currentQuestionIndex = 0;
         nextButton.disabled = true;
+        let tryAgain = document.querySelector('.retryButton')
+        tryAgain.style.display = 'block'
+        tryAgain.addEventListener('click', () => {
+          window.location.reload()
+          startQuiz();
+          
+        })
       }
   })
-
-
 })
 science.addEventListener('click', () => {
-  let nextButton = document.querySelector('.nextButton')
+  let realAnswer = document.querySelector('.realAnswer');
+  let nextButton = document.querySelector('.nextButton');
   nextButton.style.display = 'block';
-  maths.style.display = 'none'
-  english.style.display = 'none'
-  science.style.display = 'none'
+  let answerButton = document.querySelector('.answerButton');
+  answerButton.style.display = 'block';
+  maths.style.display = 'none';
+  english.style.display = 'none';
+  science.style.display = 'none';
 
-  const scienceQuestions = [
+
+const scienceQuestions = [
   {
     id: 1,
     question: "What is the chemical symbol for gold?",
@@ -1003,7 +1059,6 @@ science.addEventListener('click', () => {
     }
   ];
 
-
   let randomScienceQuestion = []
 
   for (let i = 0; i < 10; i++) {
@@ -1013,8 +1068,7 @@ science.addEventListener('click', () => {
   } 
     
 
-  // let randomScienceQuestion = mathQuestions[Math.floor(Math.random() * mathQuestions.length)];
-  console.log(randomScienceQuestion.length);
+  // let randomScienceQuestion = ScienceQuestions[Math.floor(Math.random() * ScienceQuestions.length)];
   
   let question = document.querySelector('.question')
   let options = document.querySelector('.options')
@@ -1033,26 +1087,26 @@ science.addEventListener('click', () => {
     <option value="${randomScienceQuestion[0].options[3]}">D</option>
   </select>
   `;
-
- options.innerHTML += `<button class='answerButton'>answer</button>`;
  let userOption = document.querySelector('.userAnswer')
  
-  let answerButton = document.querySelector('.answerButton')
-  answerButton.addEventListener('click', () => {
-    if(userOption.value === randomScienceQuestion[0].answer) {
-      console.log('correct');
-      score += 1
-      // console.log(score+'/10');
-        
-       
-    } else if(userOption !== randomScienceQuestion[0].answer) {
-      // console.log(score, '/10');
-      console.log('incorrect');
-      }
-  })
-
+  function answer() {
+    if(userOption.value === randomScienceQuestion[currentQuestionIndex].answer) {
+     answerButton.disabled = 'true';
+      score++;
+      realAnswer.innerText = `Correct! ${score}/10`
+     
+    } else if(userOption !== randomScienceQuestion[currentQuestionIndex].answer) {
+        realAnswer.innerText = `Incorrect, Answer: '${randomScienceQuestion[currentQuestionIndex].answer}', ${score}/10` 
+        answerButton.disabled = 'true';
+      };
+  }
+    answerButton.addEventListener('click', () => {
+      answer();
+    })
 
   function displayQuestion() {
+    
+    answerButton.disabled = false
     options.innerHTML = `<li class='option'>A. ${randomScienceQuestion[currentQuestionIndex].options[0]}</li>`;
     options.innerHTML += `<li class='option'>B. ${randomScienceQuestion[currentQuestionIndex].options[1]}</li>`;
     options.innerHTML += `<li class='option'>C. ${randomScienceQuestion[currentQuestionIndex].options[2]}</li>`;
@@ -1066,26 +1120,53 @@ science.addEventListener('click', () => {
       <option value="${randomScienceQuestion[currentQuestionIndex].options[3]}">D</option>
     </select>
     `;
-    options.innerHTML += `<button class='answerButton'>answer</button>`;
-    question.innerText = currentQuestionIndex +1 + '. ' + randomScienceQuestion[currentQuestionIndex].question
-}
-    nextButton.addEventListener('click', () => {
+let userOption = document.querySelector('.userAnswer')
+ 
+  function answer() {
+    if(userOption.value === randomScienceQuestion[currentQuestionIndex].answer) {
+      answerButton.disabled = 'true';
+      score++;
+      realAnswer.innerText = `Correct! ${score}/10`;
+     
+    } else if(userOption !== randomScienceQuestion[currentQuestionIndex].answer) {
+        realAnswer.innerText = `Incorrect, Answer: '${randomScienceQuestion[currentQuestionIndex].answer}', ${score}/10` 
+        answerButton.disabled = 'true';
+      };
+  }
+    answerButton.addEventListener('click', () => {
+      answer();
+    })
+
+    question.innerText = currentQuestionIndex +1 + '. ' + randomScienceQuestion[currentQuestionIndex].question;
+  }
+
+  nextButton.addEventListener('click', () => {
+      answerButton.disabled = 'false';
+
     if(currentQuestionIndex < randomScienceQuestion.length - 1) {
       currentQuestionIndex++;
-      console.log(currentQuestionIndex);
-      displayQuestion()
+      displayQuestion();
     } else {
-        alert("You have completed the quiz!");
+        alert(`You have completed the quiz! You got ${score}/10`);
         currentQuestionIndex = 0;
         nextButton.disabled = true;
+        let tryAgain = document.querySelector('.retryButton')
+        tryAgain.style.display = 'block'
+        tryAgain.addEventListener('click', () => {
+          window.location.reload()
+          startQuiz();
+          
+        })
       }
   })
-
-
 })
-}
 
+}
 
 startButton.addEventListener('click', () => {
   startQuiz();
 })
+
+let tryAgain = document.querySelector('.retryButton')
+
+
