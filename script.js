@@ -1,9 +1,10 @@
 let startButton = document.querySelector('.startButton')
 
+
+
 function startQuiz() {
   startButton.style.display = 'none'
   let currentQuestionIndex = 0
-  let score = 0
   let questionDiv = document.querySelector('.question-div')
   questionDiv.innerHTML += `
     <p class="maths">Maths</p>
@@ -15,7 +16,7 @@ function startQuiz() {
   let science = document.querySelector('.science')
 
 maths.addEventListener('click', () => {
-  let realAnswer = document.querySelector('.realAnswer')
+  let score = 0
   let nextButton = document.querySelector('.nextButton')
   nextButton.style.display = 'block';
   let answerButton = document.querySelector('.answerButton')
@@ -145,70 +146,182 @@ maths.addEventListener('click', () => {
   let options = document.querySelector('.options')
   question.innerHTML = '1. ' + randomMathQuestion[0].question
   options.innerHTML = ''
-  options.innerHTML += `<li class='option'>A. ${randomMathQuestion[0].options[0]}</li>`;
-  options.innerHTML += `<li class='option'>B. ${randomMathQuestion[0].options[1]}</li>`;
-  options.innerHTML += `<li class='option'>C. ${randomMathQuestion[0].options[2]}</li>`;
-  options.innerHTML += `<li class='option'>D. ${randomMathQuestion[0].options[3]}</li>`;
-  options.innerHTML +=`<label for="userAnswer">Choose your answer:</label>
-  <select name="userAnswer" class="userAnswer">
-    <option value=""></option>
-    <option value="${randomMathQuestion[0].options[0]}">A</option>
-    <option value="${randomMathQuestion[0].options[1]}">B</option>
-    <option value="${randomMathQuestion[0].options[2]}">C</option>
-    <option value="${randomMathQuestion[0].options[3]}">D</option>
-  </select>
+  options.innerHTML += `
+      <input type="radio" id="${randomMathQuestion[0].options[0]}" name="option" value="${randomMathQuestion[0].options[0]}" class='option optionA' checked>
+      <label for="${randomMathQuestion[0].options[0]}">${randomMathQuestion[0].options[0]}</label><br>
+      `;
+  options.innerHTML += `
+      <input type="radio" id="${randomMathQuestion[0].options[1]}" name="option" value="${randomMathQuestion[0].options[1]}" class='option optionB' checked>
+      <label for="${randomMathQuestion[0].options[1]}">${randomMathQuestion[0].options[1]}</label><br>
+    `;
+  options.innerHTML += `
+        <input type="radio" id="${randomMathQuestion[0].options[2]}" name="option" value="${randomMathQuestion[0].options[2]}" class='option optionC' checked>
+      <label for="${randomMathQuestion[0].options[2]}">${randomMathQuestion[0].options[2]}</label><br> 
   `;
- let userOption = document.querySelector('.userAnswer')
- 
-  function answer() {
-    if(userOption.value === randomMathQuestion[currentQuestionIndex].answer) {
-     answerButton.disabled = 'true';
-      score++;
-      realAnswer.innerText = `Correct! ${score}/10`
+  options.innerHTML += `
+  <input type="radio" id="${randomMathQuestion[0].options[3]}" name="option" value="${randomMathQuestion[0].options[3]}" class='option optionD' checked>
+      <label for="${randomMathQuestion[0].options[3]}">${randomMathQuestion[0].options[3]}</label><br>
+      `;
+  options.innerHTML += `
+        <input type="radio" id="IDK" name="option" value="IDK" class='option' checked>
+      <label for="IDK"></label><br> 
+  `;
 
-    } else if(userOption !== randomMathQuestion[currentQuestionIndex].answer) {
-      realAnswer.innerText = `Incorrect, Answer: '${randomMathQuestion[currentQuestionIndex].answer}', ${score}/10` 
-      answerButton.disabled = 'true';
-      };
+ let optionA = document.querySelector('.optionA')
+ let optionB = document.querySelector('.optionB')
+ let optionC = document.querySelector('.optionC')
+ let optionD = document.querySelector('.optionD')
+ 
+ optionA.addEventListener('click', () => {
+  if (optionA.value == randomMathQuestion[currentQuestionIndex].answer) {
+    console.log('correct');
+    score+=1;
+    console.log(score);
+    
+    console.log(randomMathQuestion[currentQuestionIndex].answer)
+    console.log(optionB.value);
+    
+  } else {
+    console.log(randomMathQuestion[currentQuestionIndex].answer)
+    console.log('incorrect');
+    console.log(optionB.value);
+    
   }
-    answerButton.addEventListener('click', () => {
-      answer();
-    })
+ });
+optionB.addEventListener('click', () => {
+  if (optionB.value == randomMathQuestion[currentQuestionIndex].answer) {
+    console.log('correct');
+    score+=1;
+    console.log(score);
+    
+    console.log(randomMathQuestion[currentQuestionIndex].answer)
+    console.log(optionB.value);
+  } else {
+    console.log(randomMathQuestion[currentQuestionIndex].answer)
+    console.log('incorrect');
+    console.log(optionB.value);
+    
+  }
+ });
+  optionC.addEventListener('click', () => {
+   if (optionC.value == randomMathQuestion[currentQuestionIndex].answer) {
+      console.log(optionC.value);
+      console.log('correct');
+      score+=1;
+      console.log(score);
+      
+     console.log(randomMathQuestion[currentQuestionIndex].answer)
+  } else {
+    console.log(randomMathQuestion[currentQuestionIndex].answer)
+    console.log('incorrect');
+    console.log(optionC.value);
+  }
+ });
+ optionD.addEventListener('click', () => {
+  if (optionD.value == randomMathQuestion[currentQuestionIndex].answer) {
+    console.log(optionD.value);
+    console.log('correct');
+    score+=1;
+    console.log(score);
+    
+    console.log(randomMathQuestion[currentQuestionIndex].answer)
+  } else {
+    console.log(randomMathQuestion[currentQuestionIndex].answer)
+    console.log('incorrect');
+    console.log(optionD.value);
+    
+  }
+ });
+
 
   function displayQuestion() {
-    
-    answerButton.disabled = false
-    options.innerHTML = `<li class='option'>A. ${randomMathQuestion[currentQuestionIndex].options[0]}</li>`;
-    options.innerHTML += `<li class='option'>B. ${randomMathQuestion[currentQuestionIndex].options[1]}</li>`;
-    options.innerHTML += `<li class='option'>C. ${randomMathQuestion[currentQuestionIndex].options[2]}</li>`;
-    options.innerHTML += `<li class='option'>D. ${randomMathQuestion[currentQuestionIndex].options[3]}</li>`;
-    options.innerHTML +=`<label for="userAnswer">Choose your answer:</label>
-    <select name="userAnswer" class="userAnswer">
-      <option value=""></option>
-      <option value="${randomMathQuestion[currentQuestionIndex].options[0]}">A</option>
-      <option value="${randomMathQuestion[currentQuestionIndex].options[1]}">B</option>
-      <option value="${randomMathQuestion[currentQuestionIndex].options[2]}">C</option>
-      <option value="${randomMathQuestion[currentQuestionIndex].options[3]}">D</option>
-    </select>
+    options.innerHTML = ''
+    options.innerHTML += `
+      <input type="radio" id="${randomMathQuestion[currentQuestionIndex].options[0]}" name="option" value="${randomMathQuestion[currentQuestionIndex].options[0]}" class='option optionA' checked>
+      <label for="${randomMathQuestion[currentQuestionIndex].options[0]}">${randomMathQuestion[currentQuestionIndex].options[0]}</label><br>
+      `;
+  options.innerHTML += `
+      <input type="radio" id="${randomMathQuestion[currentQuestionIndex].options[1]}" name="option" value="${randomMathQuestion[currentQuestionIndex].options[1]}" class='option optionB' checked>
+      <label for="${randomMathQuestion[currentQuestionIndex].options[1]}">${randomMathQuestion[currentQuestionIndex].options[1]}</label><br>
     `;
-let userOption = document.querySelector('.userAnswer')
- 
-  function answer() {
-    if(userOption.value === randomMathQuestion[currentQuestionIndex].answer) {
-      answerButton.disabled = 'true';
-      score++;
-      realAnswer.innerText = `Correct! ${score}/10`;
-     
-    } else if(userOption !== randomMathQuestion[currentQuestionIndex].answer) {
-      realAnswer.innerText = `Incorrect, Answer: '${randomMathQuestion[currentQuestionIndex].answer}', ${score}/10` 
-      answerButton.disabled = 'true';
-      };
-  }
-    answerButton.addEventListener('click', () => {
-      answer();
-    })
+  options.innerHTML += `
+        <input type="radio" id="${randomMathQuestion[currentQuestionIndex].options[2]}" name="option" value="${randomMathQuestion[currentQuestionIndex].options[2]}" class='option optionC' checked>
+      <label for="${randomMathQuestion[currentQuestionIndex].options[2]}">${randomMathQuestion[currentQuestionIndex].options[2]}</label><br> 
+  `;
+  options.innerHTML += `
+  <input type="radio" id="${randomMathQuestion[currentQuestionIndex].options[3]}" name="option" value="${randomMathQuestion[currentQuestionIndex].options[3]}" class='option optionD' checked>
+      <label for="${randomMathQuestion[currentQuestionIndex].options[3]}">${randomMathQuestion[currentQuestionIndex].options[3]}</label><br>
+      </li>`;
+  options.innerHTML += `
+        <input type="radio" id="IDK" name="option" value="IDK" class='option' checked>
+      <label for="IDK"></label><br> 
+  `;
 
-    question.innerText = currentQuestionIndex +1 + '. ' + randomMathQuestion[currentQuestionIndex].question;
+ let optionA = document.querySelector('.optionA')
+ let optionB = document.querySelector('.optionB')
+ let optionC = document.querySelector('.optionC')
+ let optionD = document.querySelector('.optionD')
+ optionA.addEventListener('click', () => {
+  if (optionA.value == randomMathQuestion[currentQuestionIndex].answer) {
+    console.log('correct');
+    score+=1;
+    console.log(score);
+    console.log(randomMathQuestion[currentQuestionIndex].answer)
+    console.log(optionB.value);
+    
+  } else {
+    console.log(randomMathQuestion[currentQuestionIndex].answer)
+    console.log('incorrect');
+    console.log(optionB.value);
+    
+  }
+ });
+optionB.addEventListener('click', () => {
+  if (optionB.value == randomMathQuestion[currentQuestionIndex].answer) {
+    console.log('correct');
+    score+=1;
+    console.log(score);
+    
+    console.log(randomMathQuestion[currentQuestionIndex].answer)
+    console.log(optionB.value);
+  } else {
+    console.log(randomMathQuestion[currentQuestionIndex].answer)
+    console.log('incorrect');
+    console.log(optionB.value);
+    
+  }
+ });
+  optionC.addEventListener('click', () => {
+  if (optionC.value == randomMathQuestion[currentQuestionIndex].answer) {
+    console.log(optionC.value);
+    console.log('correct');
+    score+=1;
+    console.log(score);
+    
+    console.log(randomMathQuestion[currentQuestionIndex].answer)
+  } else {
+    console.log(randomMathQuestion[currentQuestionIndex].answer)
+    console.log('incorrect');
+    console.log(optionC.value);
+    
+  }
+ });
+ optionD.addEventListener('click', () => {
+  if (optionD.value == randomMathQuestion[currentQuestionIndex].answer) {
+    console.log(optionD.value);
+    console.log('correct');
+    score+=1;
+    console.log(score);
+    
+    console.log(randomMathQuestion[currentQuestionIndex].answer)
+  } else {
+    console.log(randomMathQuestion[currentQuestionIndex].answer)
+    console.log('incorrect');
+    console.log(optionD.value);
+    
+  }
+ });
+  question.innerText = currentQuestionIndex +1 + '. ' + randomMathQuestion[currentQuestionIndex].question;
   }
 
   nextButton.addEventListener('click', () => {
@@ -219,6 +332,16 @@ let userOption = document.querySelector('.userAnswer')
       displayQuestion();
     } else {
         alert(`You have completed the quiz! You got ${score}/10`);
+        questionDiv.innerHTML = '  <button class="retryButton">Try again</button> ';
+        let realAnswer = document.querySelector('.realAnswer')
+        realAnswer.innerHTML = 'Corrections:'
+        
+        for (let i = 0; i < 10; i++) {
+          realAnswer.innerHTML += `<p>${i + 1}. ${randomMathQuestion[i].question}`
+          realAnswer.innerHTML += `Answer :${randomMathQuestion[i].answer}</p>`
+
+        }
+        realAnswer.innerHTML+=`You got ${score}/10`
         currentQuestionIndex = 0;
         nextButton.disabled = true;
         let tryAgain = document.querySelector('.retryButton')
@@ -226,20 +349,21 @@ let userOption = document.querySelector('.userAnswer')
         tryAgain.addEventListener('click', () => {
           window.location.reload()
           startQuiz();
-          
         })
       }
   })
 })
 english.addEventListener('click', () => {
-  let realAnswer = document.querySelector('.realAnswer');
-  let nextButton = document.querySelector('.nextButton');
+  let score = 0
+
+  let nextButton = document.querySelector('.nextButton')
   nextButton.style.display = 'block';
-  let answerButton = document.querySelector('.answerButton');
-  answerButton.style.display = 'block';
-  maths.style.display = 'none';
-  english.style.display = 'none';
-  science.style.display = 'none';
+  let answerButton = document.querySelector('.answerButton')
+  answerButton.style.display = 'block'
+  maths.style.display = 'none'
+  english.style.display = 'none'
+  science.style.display = 'none'
+
 
 
 const englishQuestions = [
@@ -342,7 +466,6 @@ const englishQuestions = [
   { id: 99, question: "Fill in the blank: She has ___ friends.", options: ["much", "a lot of", "little", "any"], answer: "a lot of" },
   { id: 100, question: "What is the past participle of 'be'?", options: ["was", "been", "being", "is"], answer: "been" }
 ];
-
   let randomEnglishQuestion = []
 
   for (let i = 0; i < 10; i++) {
@@ -351,78 +474,187 @@ const englishQuestions = [
     randomEnglishQuestion.push(englishQuestion)
   } 
     
-
-  // let randomEnglishQuestion = EnglishQuestions[Math.floor(Math.random() * EnglishQuestions.length)];
-  
-  
   let question = document.querySelector('.question')
   let options = document.querySelector('.options')
   question.innerHTML = '1. ' + randomEnglishQuestion[0].question
   options.innerHTML = ''
-  options.innerHTML += `<li class='option'>A. ${randomEnglishQuestion[0].options[0]}</li>`;
-  options.innerHTML += `<li class='option'>B. ${randomEnglishQuestion[0].options[1]}</li>`;
-  options.innerHTML += `<li class='option'>C. ${randomEnglishQuestion[0].options[2]}</li>`;
-  options.innerHTML += `<li class='option'>D. ${randomEnglishQuestion[0].options[3]}</li>`;
-  options.innerHTML +=`<label for="userAnswer">Choose your answer:</label>
-  <select name="userAnswer" class="userAnswer">
-    <option value=""></option>
-    <option value="${randomEnglishQuestion[0].options[0]}">A</option>
-    <option value="${randomEnglishQuestion[0].options[1]}">B</option>
-    <option value="${randomEnglishQuestion[0].options[2]}">C</option>
-    <option value="${randomEnglishQuestion[0].options[3]}">D</option>
-  </select>
+  options.innerHTML += `
+      <input type="radio" id="${randomEnglishQuestion[0].options[0]}" name="option" value="${randomEnglishQuestion[0].options[0]}" class='option optionA' checked>
+      <label for="${randomEnglishQuestion[0].options[0]}">${randomEnglishQuestion[0].options[0]}</label><br>
+      `;
+  options.innerHTML += `
+      <input type="radio" id="${randomEnglishQuestion[0].options[1]}" name="option" value="${randomEnglishQuestion[0].options[1]}" class='option optionB' checked>
+      <label for="${randomEnglishQuestion[0].options[1]}">${randomEnglishQuestion[0].options[1]}</label><br>
+    `;
+  options.innerHTML += `
+        <input type="radio" id="${randomEnglishQuestion[0].options[2]}" name="option" value="${randomEnglishQuestion[0].options[2]}" class='option optionC' checked>
+      <label for="${randomEnglishQuestion[0].options[2]}">${randomEnglishQuestion[0].options[2]}</label><br> 
   `;
- let userOption = document.querySelector('.userAnswer')
+  options.innerHTML += `
+  <input type="radio" id="${randomEnglishQuestion[0].options[3]}" name="option" value="${randomEnglishQuestion[0].options[3]}" class='option optionD' checked>
+      <label for="${randomEnglishQuestion[0].options[3]}">${randomEnglishQuestion[0].options[3]}</label><br>
+      `;
+  options.innerHTML += `
+        <input type="radio" id="IDK" name="option" value="IDK" class='option' checked>
+      <label for="IDK"></label><br> 
+  `;
+
+ let optionA = document.querySelector('.optionA')
+ let optionB = document.querySelector('.optionB')
+ let optionC = document.querySelector('.optionC')
+ let optionD = document.querySelector('.optionD')
  
-  function answer() {
-    if(userOption.value === randomEnglishQuestion[currentQuestionIndex].answer) {
-     answerButton.disabled = 'true';
-      score++;
-      realAnswer.innerText = `Correct! ${score}/10`
-     
-    } else if(userOption !== randomEnglishQuestion[currentQuestionIndex].answer) {
-      realAnswer.innerText = `Incorrect, Answer: '${randomEnglishQuestion[currentQuestionIndex].answer}', ${score}/10`;
-      answerButton.disabled = 'true';
-      };
+ optionA.addEventListener('click', () => {
+  if (optionA.value == randomEnglishQuestion[currentQuestionIndex].answer) {
+    console.log('correct');
+    score+=1;
+    console.log(score);
+    
+    console.log(randomEnglishQuestion[currentQuestionIndex].answer)
+    console.log(optionB.value);
+    
+  } else {
+    console.log(randomEnglishQuestion[currentQuestionIndex].answer)
+    console.log('incorrect');
+    console.log(optionB.value);
+    
   }
-    answerButton.addEventListener('click', () => {
-      answer();
-    })
+ });
+optionB.addEventListener('click', () => {
+  if (optionB.value == randomEnglishQuestion[currentQuestionIndex].answer) {
+    console.log('correct');
+    score+=1;
+    console.log(score);
+    
+    console.log(randomEnglishQuestion[currentQuestionIndex].answer)
+    console.log(optionB.value);
+  } else {
+    console.log(randomEnglishQuestion[currentQuestionIndex].answer)
+    console.log('incorrect');
+    console.log(optionB.value);
+    
+  }
+ });
+  optionC.addEventListener('click', () => {
+   if (optionC.value == randomEnglishQuestion[currentQuestionIndex].answer) {
+      console.log(optionC.value);
+      console.log('correct');
+      score+=1;
+      console.log(score);
+      
+     console.log(randomEnglishQuestion[currentQuestionIndex].answer)
+  } else {
+    console.log(randomEnglishQuestion[currentQuestionIndex].answer)
+    console.log('incorrect');
+    console.log(optionC.value);
+  }
+ });
+ optionD.addEventListener('click', () => {
+  if (optionD.value == randomEnglishQuestion[currentQuestionIndex].answer) {
+    console.log(optionD.value);
+    console.log('correct');
+    score+=1;
+    console.log(score);
+    
+    console.log(randomEnglishQuestion[currentQuestionIndex].answer)
+  } else {
+    console.log(randomEnglishQuestion[currentQuestionIndex].answer)
+    console.log('incorrect');
+    console.log(optionD.value);
+    
+  }
+ });
+
 
   function displayQuestion() {
-    
-    answerButton.disabled = false
-    options.innerHTML = `<li class='option'>A. ${randomEnglishQuestion[currentQuestionIndex].options[0]}</li>`;
-    options.innerHTML += `<li class='option'>B. ${randomEnglishQuestion[currentQuestionIndex].options[1]}</li>`;
-    options.innerHTML += `<li class='option'>C. ${randomEnglishQuestion[currentQuestionIndex].options[2]}</li>`;
-    options.innerHTML += `<li class='option'>D. ${randomEnglishQuestion[currentQuestionIndex].options[3]}</li>`;
-    options.innerHTML +=`<label for="userAnswer">Choose your answer:</label>
-    <select name="userAnswer" class="userAnswer">
-      <option value=""></option>
-      <option value="${randomEnglishQuestion[currentQuestionIndex].options[0]}">A</option>
-      <option value="${randomEnglishQuestion[currentQuestionIndex].options[1]}">B</option>
-      <option value="${randomEnglishQuestion[currentQuestionIndex].options[2]}">C</option>
-      <option value="${randomEnglishQuestion[currentQuestionIndex].options[3]}">D</option>
-    </select>
+    options.innerHTML = ''
+    options.innerHTML += `
+      <input type="radio" id="${randomEnglishQuestion[currentQuestionIndex].options[0]}" name="option" value="${randomEnglishQuestion[currentQuestionIndex].options[0]}" class='option optionA' checked>
+      <label for="${randomEnglishQuestion[currentQuestionIndex].options[0]}">${randomEnglishQuestion[currentQuestionIndex].options[0]}</label><br>
+      `;
+  options.innerHTML += `
+      <input type="radio" id="${randomEnglishQuestion[currentQuestionIndex].options[1]}" name="option" value="${randomEnglishQuestion[currentQuestionIndex].options[1]}" class='option optionB' checked>
+      <label for="${randomEnglishQuestion[currentQuestionIndex].options[1]}">${randomEnglishQuestion[currentQuestionIndex].options[1]}</label><br>
     `;
-let userOption = document.querySelector('.userAnswer')
- 
-  function answer() {
-    if(userOption.value === randomEnglishQuestion[currentQuestionIndex].answer) {
-      answerButton.disabled = 'true';
-      score++;
-      realAnswer.innerText = `Correct! ${score}/10`;
-     
-    } else if(userOption !== randomEnglishQuestion[currentQuestionIndex].answer) {
-        realAnswer.innerText = `Incorrect, Answer: '${randomEnglishQuestion[currentQuestionIndex].answer}', ${score}/10`;
-        answerButton.disabled = 'true';
-      };
-  }
-    answerButton.addEventListener('click', () => {
-      answer();
-    })
+  options.innerHTML += `
+        <input type="radio" id="${randomEnglishQuestion[currentQuestionIndex].options[2]}" name="option" value="${randomEnglishQuestion[currentQuestionIndex].options[2]}" class='option optionC' checked>
+      <label for="${randomEnglishQuestion[currentQuestionIndex].options[2]}">${randomEnglishQuestion[currentQuestionIndex].options[2]}</label><br> 
+  `;
+  options.innerHTML += `
+  <input type="radio" id="${randomEnglishQuestion[currentQuestionIndex].options[3]}" name="option" value="${randomEnglishQuestion[currentQuestionIndex].options[3]}" class='option optionD' checked>
+      <label for="${randomEnglishQuestion[currentQuestionIndex].options[3]}">${randomEnglishQuestion[currentQuestionIndex].options[3]}</label><br>
+      </li>`;
+  options.innerHTML += `
+        <input type="radio" id="IDK" name="option" value="IDK" class='option' checked>
+      <label for="IDK"></label><br> 
+  `;
 
-    question.innerText = currentQuestionIndex +1 + '. ' + randomEnglishQuestion[currentQuestionIndex].question;
+ let optionA = document.querySelector('.optionA')
+ let optionB = document.querySelector('.optionB')
+ let optionC = document.querySelector('.optionC')
+ let optionD = document.querySelector('.optionD')
+ optionA.addEventListener('click', () => {
+  if (optionA.value == randomEnglishQuestion[currentQuestionIndex].answer) {
+    console.log('correct');
+    score+=1;
+    console.log(score);
+    
+    console.log(randomEnglishQuestion[currentQuestionIndex].answer)
+    console.log(optionB.value);
+    
+  } else {
+    console.log(randomEnglishQuestion[currentQuestionIndex].answer)
+    console.log('incorrect');
+    console.log(optionB.value);
+    
+  }
+ });
+optionB.addEventListener('click', () => {
+  if (optionB.value == randomEnglishQuestion[currentQuestionIndex].answer) {
+    console.log('correct');
+    score+=1;
+    console.log(score);
+    
+    console.log(randomEnglishQuestion[currentQuestionIndex].answer)
+    console.log(optionB.value);
+  } else {
+    console.log(randomEnglishQuestion[currentQuestionIndex].answer)
+    console.log('incorrect');
+    console.log(optionB.value);
+    
+  }
+ });
+  optionC.addEventListener('click', () => {
+  if (optionC.value == randomEnglishQuestion[currentQuestionIndex].answer) {
+    console.log(optionC.value);
+    console.log('correct');
+    score+=1;
+    console.log(score);
+    
+    console.log(randomEnglishQuestion[currentQuestionIndex].answer)
+  } else {
+    console.log(randomEnglishQuestion[currentQuestionIndex].answer)
+    console.log('incorrect');
+    console.log(optionC.value);
+    
+  }
+ });
+ optionD.addEventListener('click', () => {
+  if (optionD.value == randomEnglishQuestion[currentQuestionIndex].answer) {
+    console.log(optionD.value);
+    console.log('correct');
+    score+=1;
+    console.log(score);
+    
+    console.log(randomEnglishQuestion[currentQuestionIndex].answer)
+  } else {
+    console.log(randomEnglishQuestion[currentQuestionIndex].answer)
+    console.log('incorrect');
+    console.log(optionD.value);
+    
+  }
+ });
+  question.innerText = currentQuestionIndex +1 + '. ' + randomEnglishQuestion[currentQuestionIndex].question;
   }
 
   nextButton.addEventListener('click', () => {
@@ -433,6 +665,16 @@ let userOption = document.querySelector('.userAnswer')
       displayQuestion();
     } else {
         alert(`You have completed the quiz! You got ${score}/10`);
+        questionDiv.innerHTML = '  <button class="retryButton">Try again</button> ';
+        let realAnswer = document.querySelector('.realAnswer')
+        realAnswer.innerHTML = 'Corrections:'
+        
+        for (let i = 0; i < 10; i++) {
+          realAnswer.innerHTML += `<p>${i + 1}. ${randomEnglishQuestion[i].question}`
+          realAnswer.innerHTML += `Answer :${randomEnglishQuestion[i].answer}</p>`
+
+        }
+        realAnswer.innerHTML+=`You got ${score}/10`
         currentQuestionIndex = 0;
         nextButton.disabled = true;
         let tryAgain = document.querySelector('.retryButton')
@@ -440,20 +682,21 @@ let userOption = document.querySelector('.userAnswer')
         tryAgain.addEventListener('click', () => {
           window.location.reload()
           startQuiz();
-          
         })
       }
   })
 })
+
 science.addEventListener('click', () => {
-  let realAnswer = document.querySelector('.realAnswer');
-  let nextButton = document.querySelector('.nextButton');
+  let score = 0
+  let nextButton = document.querySelector('.nextButton')
   nextButton.style.display = 'block';
-  let answerButton = document.querySelector('.answerButton');
-  answerButton.style.display = 'block';
-  maths.style.display = 'none';
-  english.style.display = 'none';
-  science.style.display = 'none';
+  let answerButton = document.querySelector('.answerButton')
+  answerButton.style.display = 'block'
+  maths.style.display = 'none'
+  english.style.display = 'none'
+  science.style.display = 'none'
+
 
 
 const scienceQuestions = [
@@ -1058,86 +1301,195 @@ const scienceQuestions = [
       answer: "W"
     }
   ];
-
   let randomScienceQuestion = []
 
   for (let i = 0; i < 10; i++) {
     const element = [i];
-    let scienceQuestion = scienceQuestions[Math.floor(Math.random() * scienceQuestions.length)];
+    let scienceQuestion =scienceQuestions[Math.floor(Math.random() * scienceQuestions.length)];
     randomScienceQuestion.push(scienceQuestion)
   } 
     
-
-  // let randomScienceQuestion = ScienceQuestions[Math.floor(Math.random() * ScienceQuestions.length)];
-  
   let question = document.querySelector('.question')
   let options = document.querySelector('.options')
   question.innerHTML = '1. ' + randomScienceQuestion[0].question
   options.innerHTML = ''
-  options.innerHTML += `<li class='option'>A. ${randomScienceQuestion[0].options[0]}</li>`;
-  options.innerHTML += `<li class='option'>B. ${randomScienceQuestion[0].options[1]}</li>`;
-  options.innerHTML += `<li class='option'>C. ${randomScienceQuestion[0].options[2]}</li>`;
-  options.innerHTML += `<li class='option'>D. ${randomScienceQuestion[0].options[3]}</li>`;
-  options.innerHTML +=`<label for="userAnswer">Choose your answer:</label>
-  <select name="userAnswer" class="userAnswer">
-    <option value=""></option>
-    <option value="${randomScienceQuestion[0].options[0]}">A</option>
-    <option value="${randomScienceQuestion[0].options[1]}">B</option>
-    <option value="${randomScienceQuestion[0].options[2]}">C</option>
-    <option value="${randomScienceQuestion[0].options[3]}">D</option>
-  </select>
+  options.innerHTML += `
+      <input type="radio" id="${randomScienceQuestion[0].options[0]}" name="option" value="${randomScienceQuestion[0].options[0]}" class='option optionA' checked>
+      <label for="${randomScienceQuestion[0].options[0]}">${randomScienceQuestion[0].options[0]}</label><br>
+      `;
+  options.innerHTML += `
+      <input type="radio" id="${randomScienceQuestion[0].options[1]}" name="option" value="${randomScienceQuestion[0].options[1]}" class='option optionB' checked>
+      <label for="${randomScienceQuestion[0].options[1]}">${randomScienceQuestion[0].options[1]}</label><br>
+    `;
+  options.innerHTML += `
+        <input type="radio" id="${randomScienceQuestion[0].options[2]}" name="option" value="${randomScienceQuestion[0].options[2]}" class='option optionC' checked>
+      <label for="${randomScienceQuestion[0].options[2]}">${randomScienceQuestion[0].options[2]}</label><br> 
   `;
- let userOption = document.querySelector('.userAnswer')
+  options.innerHTML += `
+  <input type="radio" id="${randomScienceQuestion[0].options[3]}" name="option" value="${randomScienceQuestion[0].options[3]}" class='option optionD' checked>
+      <label for="${randomScienceQuestion[0].options[3]}">${randomScienceQuestion[0].options[3]}</label><br>
+      `;
+  options.innerHTML += `
+        <input type="radio" id="IDK" name="option" value="IDK" class='option' checked>
+      <label for="IDK"></label><br> 
+  `;
+
+ let optionA = document.querySelector('.optionA')
+ let optionB = document.querySelector('.optionB')
+ let optionC = document.querySelector('.optionC')
+ let optionD = document.querySelector('.optionD')
  
-  function answer() {
-    if(userOption.value === randomScienceQuestion[currentQuestionIndex].answer) {
-     answerButton.disabled = 'true';
-      score++;
-      realAnswer.innerText = `Correct! ${score}/10`
-     
-    } else if(userOption !== randomScienceQuestion[currentQuestionIndex].answer) {
-        realAnswer.innerText = `Incorrect, Answer: '${randomScienceQuestion[currentQuestionIndex].answer}', ${score}/10` 
-        answerButton.disabled = 'true';
-      };
+ optionA.addEventListener('click', () => {
+  if (optionA.value == randomScienceQuestion[currentQuestionIndex].answer) {
+    console.log('correct');
+    score+=1;
+    console.log(score);
+    
+    console.log(randomScienceQuestion[currentQuestionIndex].answer)
+    console.log(optionB.value);
+    
+  } else {
+    console.log(randomScienceQuestion[currentQuestionIndex].answer)
+    console.log('incorrect');
+    console.log(optionB.value);
+    
   }
-    answerButton.addEventListener('click', () => {
-      answer();
-    })
+ });
+optionB.addEventListener('click', () => {
+  if (optionB.value == randomScienceQuestion[currentQuestionIndex].answer) {
+    console.log('correct');
+    score+=1;
+    console.log(score);
+    
+    console.log(randomScienceQuestion[currentQuestionIndex].answer)
+    console.log(optionB.value);
+  } else {
+    console.log(randomScienceQuestion[currentQuestionIndex].answer)
+    console.log('incorrect');
+    console.log(optionB.value);
+    
+  }
+ });
+  optionC.addEventListener('click', () => {
+   if (optionC.value == randomScienceQuestion[currentQuestionIndex].answer) {
+      console.log(optionC.value);
+      console.log('correct');
+      score+=1;
+      console.log(score);
+      
+     console.log(randomScienceQuestion[currentQuestionIndex].answer)
+  } else {
+    console.log(randomScienceQuestion[currentQuestionIndex].answer)
+    console.log('incorrect');
+    console.log(optionC.value);
+  }
+ });
+ optionD.addEventListener('click', () => {
+  if (optionD.value == randomScienceQuestion[currentQuestionIndex].answer) {
+    console.log(optionD.value);
+    console.log('correct');
+    score+=1;
+    console.log(score);
+    
+    console.log(randomScienceQuestion[currentQuestionIndex].answer)
+  } else {
+    console.log(randomScienceQuestion[currentQuestionIndex].answer)
+    console.log('incorrect');
+    console.log(optionD.value);
+    
+  }
+ });
+
 
   function displayQuestion() {
-    
-    answerButton.disabled = false
-    options.innerHTML = `<li class='option'>A. ${randomScienceQuestion[currentQuestionIndex].options[0]}</li>`;
-    options.innerHTML += `<li class='option'>B. ${randomScienceQuestion[currentQuestionIndex].options[1]}</li>`;
-    options.innerHTML += `<li class='option'>C. ${randomScienceQuestion[currentQuestionIndex].options[2]}</li>`;
-    options.innerHTML += `<li class='option'>D. ${randomScienceQuestion[currentQuestionIndex].options[3]}</li>`;
-    options.innerHTML +=`<label for="userAnswer">Choose your answer:</label>
-    <select name="userAnswer" class="userAnswer">
-      <option value=""></option>
-      <option value="${randomScienceQuestion[currentQuestionIndex].options[0]}">A</option>
-      <option value="${randomScienceQuestion[currentQuestionIndex].options[1]}">B</option>
-      <option value="${randomScienceQuestion[currentQuestionIndex].options[2]}">C</option>
-      <option value="${randomScienceQuestion[currentQuestionIndex].options[3]}">D</option>
-    </select>
+    options.innerHTML = ''
+    options.innerHTML += `
+      <input type="radio" id="${randomScienceQuestion[currentQuestionIndex].options[0]}" name="option" value="${randomScienceQuestion[currentQuestionIndex].options[0]}" class='option optionA' checked>
+      <label for="${randomScienceQuestion[currentQuestionIndex].options[0]}">${randomScienceQuestion[currentQuestionIndex].options[0]}</label><br>
+      `;
+  options.innerHTML += `
+      <input type="radio" id="${randomScienceQuestion[currentQuestionIndex].options[1]}" name="option" value="${randomScienceQuestion[currentQuestionIndex].options[1]}" class='option optionB' checked>
+      <label for="${randomScienceQuestion[currentQuestionIndex].options[1]}">${randomScienceQuestion[currentQuestionIndex].options[1]}</label><br>
     `;
-let userOption = document.querySelector('.userAnswer')
- 
-  function answer() {
-    if(userOption.value === randomScienceQuestion[currentQuestionIndex].answer) {
-      answerButton.disabled = 'true';
-      score++;
-      realAnswer.innerText = `Correct! ${score}/10`;
-     
-    } else if(userOption !== randomScienceQuestion[currentQuestionIndex].answer) {
-        realAnswer.innerText = `Incorrect, Answer: '${randomScienceQuestion[currentQuestionIndex].answer}', ${score}/10` 
-        answerButton.disabled = 'true';
-      };
-  }
-    answerButton.addEventListener('click', () => {
-      answer();
-    })
+  options.innerHTML += `
+        <input type="radio" id="${randomScienceQuestion[currentQuestionIndex].options[2]}" name="option" value="${randomScienceQuestion[currentQuestionIndex].options[2]}" class='option optionC' checked>
+      <label for="${randomScienceQuestion[currentQuestionIndex].options[2]}">${randomScienceQuestion[currentQuestionIndex].options[2]}</label><br> 
+  `;
+  options.innerHTML += `
+  <input type="radio" id="${randomScienceQuestion[currentQuestionIndex].options[3]}" name="option" value="${randomScienceQuestion[currentQuestionIndex].options[3]}" class='option optionD' checked>
+      <label for="${randomScienceQuestion[currentQuestionIndex].options[3]}">${randomScienceQuestion[currentQuestionIndex].options[3]}</label><br>
+      </li>`;
+  options.innerHTML += `
+        <input type="radio" id="IDK" name="option" value="IDK" class='option' checked>
+      <label for="IDK"></label><br> 
+  `;
 
-    question.innerText = currentQuestionIndex +1 + '. ' + randomScienceQuestion[currentQuestionIndex].question;
+ let optionA = document.querySelector('.optionA')
+ let optionB = document.querySelector('.optionB')
+ let optionC = document.querySelector('.optionC')
+ let optionD = document.querySelector('.optionD')
+ optionA.addEventListener('click', () => {
+  if (optionA.value == randomScienceQuestion[currentQuestionIndex].answer) {
+    console.log('correct');
+    score+=1;
+    console.log(score);
+    
+    console.log(randomScienceQuestion[currentQuestionIndex].answer)
+    console.log(optionB.value);
+    
+  } else {
+    console.log(randomScienceQuestion[currentQuestionIndex].answer)
+    console.log('incorrect');
+    console.log(optionB.value);
+    
+  }
+ });
+optionB.addEventListener('click', () => {
+  if (optionB.value == randomScienceQuestion[currentQuestionIndex].answer) {
+    console.log('correct');
+    score+=1;
+    console.log(score);
+    
+    console.log(randomScienceQuestion[currentQuestionIndex].answer)
+    console.log(optionB.value);
+  } else {
+    console.log(randomScienceQuestion[currentQuestionIndex].answer)
+    console.log('incorrect');
+    console.log(optionB.value);
+    
+  }
+ });
+  optionC.addEventListener('click', () => {
+  if (optionC.value == randomScienceQuestion[currentQuestionIndex].answer) {
+    console.log(optionC.value);
+    console.log('correct');
+    score+=1;
+    console.log(score);
+    
+    console.log(randomScienceQuestion[currentQuestionIndex].answer)
+  } else {
+    console.log(randomScienceQuestion[currentQuestionIndex].answer)
+    console.log('incorrect');
+    console.log(optionC.value);
+    
+  }
+ });
+ optionD.addEventListener('click', () => {
+  if (optionD.value == randomScienceQuestion[currentQuestionIndex].answer) {
+    console.log(optionD.value);
+    console.log('correct');
+    score+=1;
+    console.log(score);
+    
+    console.log(randomScienceQuestion[currentQuestionIndex].answer)
+  } else {
+    console.log(randomScienceQuestion[currentQuestionIndex].answer)
+    console.log('incorrect');
+    console.log(optionD.value);
+    
+  }
+ });
+  question.innerText = currentQuestionIndex +1 + '. ' + randomScienceQuestion[currentQuestionIndex].question;
   }
 
   nextButton.addEventListener('click', () => {
@@ -1148,6 +1500,16 @@ let userOption = document.querySelector('.userAnswer')
       displayQuestion();
     } else {
         alert(`You have completed the quiz! You got ${score}/10`);
+        questionDiv.innerHTML = '  <button class="retryButton">Try again</button> ';
+        let realAnswer = document.querySelector('.realAnswer')
+        realAnswer.innerHTML = 'Corrections:'
+        
+        for (let i = 0; i < 10; i++) {
+          realAnswer.innerHTML += `<p>${i + 1}. ${randomScienceQuestion[i].question}`
+          realAnswer.innerHTML += `Answer :${randomScienceQuestion[i].answer}</p>`
+
+        }
+        realAnswer.innerHTML+=`You got ${score}/10`
         currentQuestionIndex = 0;
         nextButton.disabled = true;
         let tryAgain = document.querySelector('.retryButton')
@@ -1155,12 +1517,10 @@ let userOption = document.querySelector('.userAnswer')
         tryAgain.addEventListener('click', () => {
           window.location.reload()
           startQuiz();
-          
         })
       }
   })
 })
-
 }
 
 startButton.addEventListener('click', () => {
