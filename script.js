@@ -6,11 +6,9 @@ function startQuiz() {
   startButton.style.display = 'none'
   let currentQuestionIndex = 0
   let questionDiv = document.querySelector('.question-div')
-  questionDiv.innerHTML += `
-    <p class="maths">Maths</p>
-    <p class="english">English</p>
-    <p class="science">Science</p>
-  `;
+  let subjectDiv = document.querySelector('.subject-div');
+  subjectDiv.style.display = 'flex';
+
   let maths = document.querySelector('.maths')
   let english = document.querySelector('.english')
   let science = document.querySelector('.science')
@@ -19,11 +17,11 @@ maths.addEventListener('click', () => {
   let score = 0
   let nextButton = document.querySelector('.nextButton')
   nextButton.style.display = 'block';
-  let answerButton = document.querySelector('.answerButton')
-  answerButton.style.display = 'block'
   maths.style.display = 'none'
   english.style.display = 'none'
   science.style.display = 'none'
+  questionDiv.style.display = 'block';
+  subjectDiv.style.display = 'none';
 
 
   const mathQuestions= [
@@ -162,73 +160,70 @@ maths.addEventListener('click', () => {
   <input type="radio" id="${randomMathQuestion[0].options[3]}" name="option" value="${randomMathQuestion[0].options[3]}" class='option optionD' checked>
       <label for="${randomMathQuestion[0].options[3]}">${randomMathQuestion[0].options[3]}</label><br>
       `;
-  options.innerHTML += `
-        <input type="radio" id="IDK" name="option" value="IDK" class='option' checked>
-      <label for="IDK"></label><br> 
-  `;
+ 
 
  let optionA = document.querySelector('.optionA')
  let optionB = document.querySelector('.optionB')
  let optionC = document.querySelector('.optionC')
  let optionD = document.querySelector('.optionD')
- 
+ let checkAnswer = ''
  optionA.addEventListener('click', () => {
   if (optionA.value == randomMathQuestion[currentQuestionIndex].answer) {
-    console.log('correct');
-    score+=1;
-    console.log(score);
-    
-    console.log(randomMathQuestion[currentQuestionIndex].answer)
-    console.log(optionB.value);
-    
+    checkAnswer = 'correct';
   } else {
-    console.log(randomMathQuestion[currentQuestionIndex].answer)
-    console.log('incorrect');
-    console.log(optionB.value);
-    
+    checkAnswer = 'incorrect';
   }
  });
 optionB.addEventListener('click', () => {
   if (optionB.value == randomMathQuestion[currentQuestionIndex].answer) {
-    console.log('correct');
-    score+=1;
-    console.log(score);
     
-    console.log(randomMathQuestion[currentQuestionIndex].answer)
-    console.log(optionB.value);
+    checkAnswer = 'correct';
+    
+    
+    
+    
+    
+    
   } else {
-    console.log(randomMathQuestion[currentQuestionIndex].answer)
-    console.log('incorrect');
-    console.log(optionB.value);
+    
+    
+    checkAnswer = 'incorrect';
+    
     
   }
  });
   optionC.addEventListener('click', () => {
    if (optionC.value == randomMathQuestion[currentQuestionIndex].answer) {
-      console.log(optionC.value);
-      console.log('correct');
-      score+=1;
-      console.log(score);
       
-     console.log(randomMathQuestion[currentQuestionIndex].answer)
+      
+      checkAnswer = 'correct';
+      
+      
+      
+      
+     
   } else {
-    console.log(randomMathQuestion[currentQuestionIndex].answer)
-    console.log('incorrect');
-    console.log(optionC.value);
+    
+    
+    checkAnswer = 'incorrect';
+    
   }
  });
  optionD.addEventListener('click', () => {
   if (optionD.value == randomMathQuestion[currentQuestionIndex].answer) {
-    console.log(optionD.value);
-    console.log('correct');
-    score+=1;
-    console.log(score);
     
-    console.log(randomMathQuestion[currentQuestionIndex].answer)
+    
+    checkAnswer = 'correct';
+    
+    
+    
+    
+    
   } else {
-    console.log(randomMathQuestion[currentQuestionIndex].answer)
-    console.log('incorrect');
-    console.log(optionD.value);
+    
+    
+    checkAnswer = 'incorrect';
+    
     
   }
  });
@@ -252,10 +247,7 @@ optionB.addEventListener('click', () => {
   <input type="radio" id="${randomMathQuestion[currentQuestionIndex].options[3]}" name="option" value="${randomMathQuestion[currentQuestionIndex].options[3]}" class='option optionD' checked>
       <label for="${randomMathQuestion[currentQuestionIndex].options[3]}">${randomMathQuestion[currentQuestionIndex].options[3]}</label><br>
       </li>`;
-  options.innerHTML += `
-        <input type="radio" id="IDK" name="option" value="IDK" class='option' checked>
-      <label for="IDK"></label><br> 
-  `;
+
 
  let optionA = document.querySelector('.optionA')
  let optionB = document.querySelector('.optionB')
@@ -263,61 +255,70 @@ optionB.addEventListener('click', () => {
  let optionD = document.querySelector('.optionD')
  optionA.addEventListener('click', () => {
   if (optionA.value == randomMathQuestion[currentQuestionIndex].answer) {
-    console.log('correct');
-    score+=1;
-    console.log(score);
-    console.log(randomMathQuestion[currentQuestionIndex].answer)
-    console.log(optionB.value);
+    
+    checkAnswer = 'correct';
+    
+    
+    
+    
+    
+    
     
   } else {
-    console.log(randomMathQuestion[currentQuestionIndex].answer)
-    console.log('incorrect');
-    console.log(optionB.value);
+    
+    checkAnswer = 'incorrect'
+    
     
   }
  });
 optionB.addEventListener('click', () => {
   if (optionB.value == randomMathQuestion[currentQuestionIndex].answer) {
-    console.log('correct');
-    score+=1;
-    console.log(score);
     
-    console.log(randomMathQuestion[currentQuestionIndex].answer)
-    console.log(optionB.value);
+    checkAnswer = 'correct';
+    
+    
+    
+    
+    
+    
   } else {
-    console.log(randomMathQuestion[currentQuestionIndex].answer)
-    console.log('incorrect');
-    console.log(optionB.value);
+    
+    checkAnswer = 'incorrect'
+    
     
   }
  });
   optionC.addEventListener('click', () => {
   if (optionC.value == randomMathQuestion[currentQuestionIndex].answer) {
-    console.log(optionC.value);
-    console.log('correct');
-    score+=1;
-    console.log(score);
     
-    console.log(randomMathQuestion[currentQuestionIndex].answer)
+    
+    checkAnswer = 'correct';
+    
+    
+    
+    
+    
   } else {
-    console.log(randomMathQuestion[currentQuestionIndex].answer)
-    console.log('incorrect');
-    console.log(optionC.value);
+    
+    checkAnswer = 'incorrect'
+    
     
   }
  });
  optionD.addEventListener('click', () => {
   if (optionD.value == randomMathQuestion[currentQuestionIndex].answer) {
-    console.log(optionD.value);
-    console.log('correct');
-    score+=1;
-    console.log(score);
     
-    console.log(randomMathQuestion[currentQuestionIndex].answer)
+    
+    checkAnswer = 'correct';
+    
+    
+    
+    
+    
   } else {
-    console.log(randomMathQuestion[currentQuestionIndex].answer)
-    console.log('incorrect');
-    console.log(optionD.value);
+    
+    checkAnswer = 'incorrect'
+    
     
   }
  });
@@ -325,8 +326,12 @@ optionB.addEventListener('click', () => {
   }
 
   nextButton.addEventListener('click', () => {
-      answerButton.disabled = 'false';
-
+    if(checkAnswer === 'correct') {
+      
+      
+      score++;
+      checkAnswer = null;
+    }
     if(currentQuestionIndex < randomMathQuestion.length - 1) {
       currentQuestionIndex++;
       displayQuestion();
@@ -358,11 +363,10 @@ english.addEventListener('click', () => {
 
   let nextButton = document.querySelector('.nextButton')
   nextButton.style.display = 'block';
-  let answerButton = document.querySelector('.answerButton')
-  answerButton.style.display = 'block'
-  maths.style.display = 'none'
-  english.style.display = 'none'
+   english.style.display = 'none'
   science.style.display = 'none'
+  questionDiv.style.display = 'block';
+  subjectDiv.style.display = 'none';
 
 
 
@@ -503,64 +507,73 @@ const englishQuestions = [
  let optionB = document.querySelector('.optionB')
  let optionC = document.querySelector('.optionC')
  let optionD = document.querySelector('.optionD')
- 
+ let checkAnswer = ''
  optionA.addEventListener('click', () => {
   if (optionA.value == randomEnglishQuestion[currentQuestionIndex].answer) {
-    console.log('correct');
-    score+=1;
-    console.log(score);
     
-    console.log(randomEnglishQuestion[currentQuestionIndex].answer)
-    console.log(optionB.value);
+    checkAnswer = 'correct';
+    
+    
+    
+    
+    
+    
     
   } else {
-    console.log(randomEnglishQuestion[currentQuestionIndex].answer)
-    console.log('incorrect');
-    console.log(optionB.value);
+    
+    checkAnswer = 'incorrect'
+    
     
   }
  });
 optionB.addEventListener('click', () => {
   if (optionB.value == randomEnglishQuestion[currentQuestionIndex].answer) {
-    console.log('correct');
-    score+=1;
-    console.log(score);
     
-    console.log(randomEnglishQuestion[currentQuestionIndex].answer)
-    console.log(optionB.value);
+    checkAnswer = 'correct';
+    
+    
+    
+    
+    
+    
   } else {
-    console.log(randomEnglishQuestion[currentQuestionIndex].answer)
-    console.log('incorrect');
-    console.log(optionB.value);
+    
+    checkAnswer = 'incorrect'
+    
     
   }
  });
   optionC.addEventListener('click', () => {
-   if (optionC.value == randomEnglishQuestion[currentQuestionIndex].answer) {
-      console.log(optionC.value);
-      console.log('correct');
-      score+=1;
-      console.log(score);
-      
-     console.log(randomEnglishQuestion[currentQuestionIndex].answer)
+  if (optionC.value == randomEnglishQuestion[currentQuestionIndex].answer) {
+    
+    
+    checkAnswer = 'correct';
+    
+    
+    
+    
+    
   } else {
-    console.log(randomEnglishQuestion[currentQuestionIndex].answer)
-    console.log('incorrect');
-    console.log(optionC.value);
+    
+    checkAnswer = 'incorrect'
+    
+    
   }
  });
  optionD.addEventListener('click', () => {
   if (optionD.value == randomEnglishQuestion[currentQuestionIndex].answer) {
-    console.log(optionD.value);
-    console.log('correct');
-    score+=1;
-    console.log(score);
     
-    console.log(randomEnglishQuestion[currentQuestionIndex].answer)
+    
+    checkAnswer = 'correct';
+    
+    
+    
+    
+    
   } else {
-    console.log(randomEnglishQuestion[currentQuestionIndex].answer)
-    console.log('incorrect');
-    console.log(optionD.value);
+    
+    checkAnswer = 'incorrect'
+    
     
   }
  });
@@ -595,62 +608,70 @@ optionB.addEventListener('click', () => {
  let optionD = document.querySelector('.optionD')
  optionA.addEventListener('click', () => {
   if (optionA.value == randomEnglishQuestion[currentQuestionIndex].answer) {
-    console.log('correct');
-    score+=1;
-    console.log(score);
     
-    console.log(randomEnglishQuestion[currentQuestionIndex].answer)
-    console.log(optionB.value);
+    checkAnswer = 'correct';
+    
+    
+    
+    
+    
+    
     
   } else {
-    console.log(randomEnglishQuestion[currentQuestionIndex].answer)
-    console.log('incorrect');
-    console.log(optionB.value);
+    
+    checkAnswer = 'incorrect'
+    
     
   }
  });
 optionB.addEventListener('click', () => {
   if (optionB.value == randomEnglishQuestion[currentQuestionIndex].answer) {
-    console.log('correct');
-    score+=1;
-    console.log(score);
     
-    console.log(randomEnglishQuestion[currentQuestionIndex].answer)
-    console.log(optionB.value);
+    checkAnswer = 'correct';
+    
+    
+    
+    
+    
+    
   } else {
-    console.log(randomEnglishQuestion[currentQuestionIndex].answer)
-    console.log('incorrect');
-    console.log(optionB.value);
+    
+    checkAnswer = 'incorrect'
+    
     
   }
  });
   optionC.addEventListener('click', () => {
   if (optionC.value == randomEnglishQuestion[currentQuestionIndex].answer) {
-    console.log(optionC.value);
-    console.log('correct');
-    score+=1;
-    console.log(score);
     
-    console.log(randomEnglishQuestion[currentQuestionIndex].answer)
+    
+    checkAnswer = 'correct';
+    
+    
+    
+    
+    
   } else {
-    console.log(randomEnglishQuestion[currentQuestionIndex].answer)
-    console.log('incorrect');
-    console.log(optionC.value);
+    
+    checkAnswer = 'incorrect'
+    
     
   }
  });
  optionD.addEventListener('click', () => {
   if (optionD.value == randomEnglishQuestion[currentQuestionIndex].answer) {
-    console.log(optionD.value);
-    console.log('correct');
-    score+=1;
-    console.log(score);
     
-    console.log(randomEnglishQuestion[currentQuestionIndex].answer)
+    
+    checkAnswer = 'correct';
+    
+    
+    
+    
+    
   } else {
-    console.log(randomEnglishQuestion[currentQuestionIndex].answer)
-    console.log('incorrect');
-    console.log(optionD.value);
+    
+    checkAnswer = 'incorrect'
+    
     
   }
  });
@@ -658,8 +679,11 @@ optionB.addEventListener('click', () => {
   }
 
   nextButton.addEventListener('click', () => {
-      answerButton.disabled = 'false';
-
+      if(checkAnswer === 'correct') {
+        score++;
+        checkAnswer = null;
+      }
+    
     if(currentQuestionIndex < randomEnglishQuestion.length - 1) {
       currentQuestionIndex++;
       displayQuestion();
@@ -686,16 +710,15 @@ optionB.addEventListener('click', () => {
       }
   })
 })
-
 science.addEventListener('click', () => {
   let score = 0
   let nextButton = document.querySelector('.nextButton')
   nextButton.style.display = 'block';
-  let answerButton = document.querySelector('.answerButton')
-  answerButton.style.display = 'block'
   maths.style.display = 'none'
   english.style.display = 'none'
   science.style.display = 'none'
+  questionDiv.style.display = 'block';
+  subjectDiv.style.display = 'none';
 
 
 
@@ -1338,68 +1361,76 @@ const scienceQuestions = [
  let optionB = document.querySelector('.optionB')
  let optionC = document.querySelector('.optionC')
  let optionD = document.querySelector('.optionD')
- 
+ let checkAnswer = ''
  optionA.addEventListener('click', () => {
   if (optionA.value == randomScienceQuestion[currentQuestionIndex].answer) {
-    console.log('correct');
-    score+=1;
-    console.log(score);
     
-    console.log(randomScienceQuestion[currentQuestionIndex].answer)
-    console.log(optionB.value);
+    checkAnswer = 'correct';
+    
+    
+    
+    
+    
+    
     
   } else {
-    console.log(randomScienceQuestion[currentQuestionIndex].answer)
-    console.log('incorrect');
-    console.log(optionB.value);
+    
+    checkAnswer = 'incorrect'
+    
     
   }
  });
 optionB.addEventListener('click', () => {
   if (optionB.value == randomScienceQuestion[currentQuestionIndex].answer) {
-    console.log('correct');
-    score+=1;
-    console.log(score);
     
-    console.log(randomScienceQuestion[currentQuestionIndex].answer)
-    console.log(optionB.value);
+    checkAnswer = 'correct';
+    
+    
+    
+    
+    
+    
   } else {
-    console.log(randomScienceQuestion[currentQuestionIndex].answer)
-    console.log('incorrect');
-    console.log(optionB.value);
+    
+    checkAnswer = 'incorrect'
+    
     
   }
  });
   optionC.addEventListener('click', () => {
-   if (optionC.value == randomScienceQuestion[currentQuestionIndex].answer) {
-      console.log(optionC.value);
-      console.log('correct');
-      score+=1;
-      console.log(score);
-      
-     console.log(randomScienceQuestion[currentQuestionIndex].answer)
+  if (optionC.value == randomScienceQuestion[currentQuestionIndex].answer) {
+    
+    
+    checkAnswer = 'correct';
+    
+    
+    
+    
+    
   } else {
-    console.log(randomScienceQuestion[currentQuestionIndex].answer)
-    console.log('incorrect');
-    console.log(optionC.value);
+    
+    checkAnswer = 'incorrect'
+    
+    
   }
  });
  optionD.addEventListener('click', () => {
   if (optionD.value == randomScienceQuestion[currentQuestionIndex].answer) {
-    console.log(optionD.value);
-    console.log('correct');
-    score+=1;
-    console.log(score);
     
-    console.log(randomScienceQuestion[currentQuestionIndex].answer)
+    
+    checkAnswer = 'correct';
+    
+    
+    
+    
+    
   } else {
-    console.log(randomScienceQuestion[currentQuestionIndex].answer)
-    console.log('incorrect');
-    console.log(optionD.value);
+    
+    checkAnswer = 'incorrect'
+    
     
   }
  });
-
 
   function displayQuestion() {
     options.innerHTML = ''
@@ -1430,62 +1461,70 @@ optionB.addEventListener('click', () => {
  let optionD = document.querySelector('.optionD')
  optionA.addEventListener('click', () => {
   if (optionA.value == randomScienceQuestion[currentQuestionIndex].answer) {
-    console.log('correct');
-    score+=1;
-    console.log(score);
     
-    console.log(randomScienceQuestion[currentQuestionIndex].answer)
-    console.log(optionB.value);
+    checkAnswer = 'correct';
+    
+    
+    
+    
+    
+    
     
   } else {
-    console.log(randomScienceQuestion[currentQuestionIndex].answer)
-    console.log('incorrect');
-    console.log(optionB.value);
+    
+    checkAnswer = 'incorrect'
+    
     
   }
  });
 optionB.addEventListener('click', () => {
   if (optionB.value == randomScienceQuestion[currentQuestionIndex].answer) {
-    console.log('correct');
-    score+=1;
-    console.log(score);
     
-    console.log(randomScienceQuestion[currentQuestionIndex].answer)
-    console.log(optionB.value);
+    checkAnswer = 'correct';
+    
+    
+    
+    
+    
+    
   } else {
-    console.log(randomScienceQuestion[currentQuestionIndex].answer)
-    console.log('incorrect');
-    console.log(optionB.value);
+    
+    checkAnswer = 'incorrect'
+    
     
   }
  });
   optionC.addEventListener('click', () => {
   if (optionC.value == randomScienceQuestion[currentQuestionIndex].answer) {
-    console.log(optionC.value);
-    console.log('correct');
-    score+=1;
-    console.log(score);
     
-    console.log(randomScienceQuestion[currentQuestionIndex].answer)
+    
+    checkAnswer = 'correct';
+    
+    
+    
+    
+    
   } else {
-    console.log(randomScienceQuestion[currentQuestionIndex].answer)
-    console.log('incorrect');
-    console.log(optionC.value);
+    
+    checkAnswer = 'incorrect'
+    
     
   }
  });
  optionD.addEventListener('click', () => {
   if (optionD.value == randomScienceQuestion[currentQuestionIndex].answer) {
-    console.log(optionD.value);
-    console.log('correct');
-    score+=1;
-    console.log(score);
     
-    console.log(randomScienceQuestion[currentQuestionIndex].answer)
+    
+    checkAnswer = 'correct';
+    
+    
+    
+    
+    
   } else {
-    console.log(randomScienceQuestion[currentQuestionIndex].answer)
-    console.log('incorrect');
-    console.log(optionD.value);
+    
+    checkAnswer = 'incorrect'
+    
     
   }
  });
@@ -1493,8 +1532,10 @@ optionB.addEventListener('click', () => {
   }
 
   nextButton.addEventListener('click', () => {
-      answerButton.disabled = 'false';
-
+    if(checkAnswer === 'correct') {
+      score++;
+      checkAnswer === null
+    }
     if(currentQuestionIndex < randomScienceQuestion.length - 1) {
       currentQuestionIndex++;
       displayQuestion();
