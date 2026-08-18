@@ -337,16 +337,17 @@ optionB.addEventListener('click', () => {
       displayQuestion();
     } else {
         alert(`You have completed the quiz! You got ${score}/10`);
-        questionDiv.innerHTML = '  <button class="retryButton">Try again</button> ';
-        let realAnswer = document.querySelector('.realAnswer')
-        realAnswer.innerHTML = 'Corrections:'
+        questionDiv.classList.add('questionDivAfter')
+        document.querySelector('body').classList.add('bodyAfter')
+        questionDiv.innerHTML = 'Corrections:'
         
         for (let i = 0; i < 10; i++) {
-          realAnswer.innerHTML += `<p>${i + 1}. ${randomMathQuestion[i].question}`
-          realAnswer.innerHTML += `Answer :${randomMathQuestion[i].answer}</p>`
+          questionDiv.innerHTML += `<p>${i + 1}. ${randomMathQuestion[i].question}`
+          questionDiv.innerHTML += `Answer :${randomMathQuestion[i].answer}</p>`
 
         }
-        realAnswer.innerHTML+=`You got ${score}/10`
+        questionDiv.innerHTML+=`You got ${score}/10`
+        questionDiv.innerHTML += '<button class="retryButton">Try again</button> ';
         currentQuestionIndex = 0;
         nextButton.disabled = true;
         let tryAgain = document.querySelector('.retryButton')
@@ -498,10 +499,7 @@ const englishQuestions = [
   <input type="radio" id="${randomEnglishQuestion[0].options[3]}" name="option" value="${randomEnglishQuestion[0].options[3]}" class='option optionD' checked>
       <label for="${randomEnglishQuestion[0].options[3]}">${randomEnglishQuestion[0].options[3]}</label><br>
       `;
-  options.innerHTML += `
-        <input type="radio" id="IDK" name="option" value="IDK" class='option' checked>
-      <label for="IDK"></label><br> 
-  `;
+
 
  let optionA = document.querySelector('.optionA')
  let optionB = document.querySelector('.optionB')
@@ -597,10 +595,7 @@ optionB.addEventListener('click', () => {
   <input type="radio" id="${randomEnglishQuestion[currentQuestionIndex].options[3]}" name="option" value="${randomEnglishQuestion[currentQuestionIndex].options[3]}" class='option optionD' checked>
       <label for="${randomEnglishQuestion[currentQuestionIndex].options[3]}">${randomEnglishQuestion[currentQuestionIndex].options[3]}</label><br>
       </li>`;
-  options.innerHTML += `
-        <input type="radio" id="IDK" name="option" value="IDK" class='option' checked>
-      <label for="IDK"></label><br> 
-  `;
+
 
  let optionA = document.querySelector('.optionA')
  let optionB = document.querySelector('.optionB')
@@ -689,16 +684,17 @@ optionB.addEventListener('click', () => {
       displayQuestion();
     } else {
         alert(`You have completed the quiz! You got ${score}/10`);
-        questionDiv.innerHTML = '  <button class="retryButton">Try again</button> ';
-        let realAnswer = document.querySelector('.realAnswer')
-        realAnswer.innerHTML = 'Corrections:'
+        questionDiv.classList.add('questionDivAfter')
+        document.querySelector('body').classList.add('bodyAfter')
+        questionDiv.innerHTML = 'Corrections:'
         
         for (let i = 0; i < 10; i++) {
-          realAnswer.innerHTML += `<p>${i + 1}. ${randomEnglishQuestion[i].question}`
-          realAnswer.innerHTML += `Answer :${randomEnglishQuestion[i].answer}</p>`
+          questionDiv.innerHTML += `<p>${i + 1}. ${randomEnglishQuestion[i].question}`
+          questionDiv.innerHTML += `Answer :${randomEnglishQuestion[i].answer}</p>`
 
         }
-        realAnswer.innerHTML+=`You got ${score}/10`
+        questionDiv.innerHTML+=`You got ${score}/10`
+        questionDiv.innerHTML += '<button class="retryButton">Try again</button> ';
         currentQuestionIndex = 0;
         nextButton.disabled = true;
         let tryAgain = document.querySelector('.retryButton')
@@ -1352,10 +1348,7 @@ const scienceQuestions = [
   <input type="radio" id="${randomScienceQuestion[0].options[3]}" name="option" value="${randomScienceQuestion[0].options[3]}" class='option optionD' checked>
       <label for="${randomScienceQuestion[0].options[3]}">${randomScienceQuestion[0].options[3]}</label><br>
       `;
-  options.innerHTML += `
-        <input type="radio" id="IDK" name="option" value="IDK" class='option' checked>
-      <label for="IDK"></label><br> 
-  `;
+
 
  let optionA = document.querySelector('.optionA')
  let optionB = document.querySelector('.optionB')
@@ -1450,10 +1443,7 @@ optionB.addEventListener('click', () => {
   <input type="radio" id="${randomScienceQuestion[currentQuestionIndex].options[3]}" name="option" value="${randomScienceQuestion[currentQuestionIndex].options[3]}" class='option optionD' checked>
       <label for="${randomScienceQuestion[currentQuestionIndex].options[3]}">${randomScienceQuestion[currentQuestionIndex].options[3]}</label><br>
       </li>`;
-  options.innerHTML += `
-        <input type="radio" id="IDK" name="option" value="IDK" class='option' checked>
-      <label for="IDK"></label><br> 
-  `;
+
 
  let optionA = document.querySelector('.optionA')
  let optionB = document.querySelector('.optionB')
@@ -1541,16 +1531,17 @@ optionB.addEventListener('click', () => {
       displayQuestion();
     } else {
         alert(`You have completed the quiz! You got ${score}/10`);
-        questionDiv.innerHTML = '  <button class="retryButton">Try again</button> ';
-        let realAnswer = document.querySelector('.realAnswer')
-        realAnswer.innerHTML = 'Corrections:'
+        questionDiv.classList.add('questionDivAfter')
+        document.querySelector('body').classList.add('bodyAfter')
+        questionDiv.innerHTML = 'Corrections:'
         
         for (let i = 0; i < 10; i++) {
-          realAnswer.innerHTML += `<p>${i + 1}. ${randomScienceQuestion[i].question}`
-          realAnswer.innerHTML += `Answer :${randomScienceQuestion[i].answer}</p>`
+          questionDiv.innerHTML += `<p>${i + 1}. ${randomScienceQuestion[i].question}`
+          questionDiv.innerHTML += `Answer :${randomScienceQuestion[i].answer}</p>`
 
         }
-        realAnswer.innerHTML+=`You got ${score}/10`
+        questionDiv.innerHTML+=`You got ${score}/10`
+        questionDiv.innerHTML += '<button class="retryButton">Try again</button> ';
         currentQuestionIndex = 0;
         nextButton.disabled = true;
         let tryAgain = document.querySelector('.retryButton')
